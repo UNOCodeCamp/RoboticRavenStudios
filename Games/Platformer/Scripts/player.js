@@ -9,16 +9,25 @@ player.y = null;
 player.width = 32;                  
 player.height = 32;                 
 player.image = new Image();
-player.image.src = "";
+player.image.src = "Assets/righty0.png";
 player.health = 100;
 player.speed = 4;
 player.velX = 0;                    
 player.velY = 0;                    
 player.isJumping = false;   
+player.poses = {};
+player.poses['right'] = new Animation( ['Assets/righty0.png','Assets/righty1.png']);
+player.poses['left'] = new Animation( ['Assets/lefty0.png','Assets/lefty1.png']);
+player.currentPose = 'right';
 
 
 player.draw = function()
 {
+    if (input.keysDown.size > 0)
+    {
+        var sprite = player.poses[player.currentPose];
+        player.image = sprite.getImage();
+    }
     renderer.ctx.drawImage( player.image, player.x, player.y, player.width, player.height ); 
 };
 
@@ -38,11 +47,14 @@ player.move = function(x, y)
     if (input.keysDown.has(37) && player.velX > -player.speed) 
     { 
         player.velX--; 
+        player.currentPose = 'left' 
+        
     }
     // player holding right
     if (input.keysDown.has(39) && player.velX < player.speed) 
     { 
         player.velX++;
+        player.currentPose = 'right'
     }
     player.velX *= friction;
 

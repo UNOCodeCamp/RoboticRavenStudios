@@ -3,13 +3,14 @@ var enemy = new Enemy();
 
 function Enemy()
 {
-	this.x = 0;
-	this.y = 0;
-	this.image = new Image();
-	this.image.src = ""
+    this.image = new Image();
+	this.image.src = "assets/target.png"
 	this.width = 32;
 	this.height = 32;
-
+	this.x = Math.random() * (viewport.width - this.width);
+	this.y = Math.random() * (viewport.height - this.height);
+	this.age = Date.now();
+	
 	this.draw = function()
 	{
 		renderer.ctx.drawImage( this.image, this.x, this.y, this.width, this.height ); 
@@ -30,7 +31,9 @@ function Enemy()
 
 	this.move = function() 
 	{
-
+		this.age =Date.now();
+	this.x = Math.random() * (viewport.width - this.width);
+	this.y = Math.random() * (viewport.height - this.height);
 	}
 
 }

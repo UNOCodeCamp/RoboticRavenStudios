@@ -6,7 +6,7 @@ function Animation(imageArray)
     for ( i in imageArray ) 
     {
         var image = new Image();
-        image.src = imgsrc;
+        image.src = imageArray[i];
         this.sequence.push(image ); 
             
     }
